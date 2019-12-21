@@ -1,0 +1,110 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="pt-br"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:jsf="http://xmlns.jcp.org/jsf">
+    <head>
+        <title>Facelet Title</title>
+        <meta charset="utf-8"/>
+    </head>
+    <body>
+        <form jsf:prependId="false" id="frm_misc" method='post'>
+            <h1 style="color:red;">tabela html5 com elementos jsf</h1>
+            <table border="1px" jsf:id="frm_misc_table">
+                <tr>
+                    <th>Livros</th>
+                    <th>Autor</th>
+                    <th>preço</th>
+                </tr>
+                <ui:repeat 
+                    value="#{homeBean.bookList}" 
+                    rendered="#{not empty homeBean.bookList}"
+                    var="livro">
+                
+                    <tr>
+                        <td>#{livro.title}</td>
+                        <td>#{livro.author}</td>    
+                        <td>R$ #{livro.price}</td>
+                    </tr>                
+                </ui:repeat>
+            </table><br/><br/>
+            
+            <!--<select jsf:id="frm_misc_select" size="1"
+                    jsf:value="{homeBean.selectedFood}"
+                    jsf:onchange="submit()">
+                
+                <ui:repeat value="{homeBean.foodList}"
+                var="food" jsfc="f:selectItems">
+                    <option jsfc="f:selectItem" 
+                            value="{food}">
+                        {food}
+                    </option>
+                </ui:repeat>
+                
+            </select>!-->
+            <span>selecionado:</span>
+            
+            <input type="text" jsfc="h:ouputText" 
+            pt:readonly="true"
+            jsf:id="frm_misc_selectedfood" 
+            jsf:value="#{homeBean.selectedFood}"
+            jsf:rendered="#{not empty homeBean.selectedFood}"/>
+            <br/>
+            
+           <span style="color:red;">select html5 com elementos jsf</span><br/>
+           
+            <select jsf:id="teste1" size="1"
+                    jsf:value="#{homeBean.selectedFood}"
+                    jsf:onchange="submit()">
+                
+                <option value="#{null}" jsfc="f:selectItem"/>
+                
+                <option value="#{homeBean.foodList}" jsfc="f:selectItems"
+                var="food">#{food}</option>
+                
+            </select>
+            <br/>    
+           
+            radio buttons html5 com elementos jsf:<br/>
+            Destruir o mundo?&nbsp;
+            <div>
+                <f:metadata>
+                    <f:viewParam name='a-radio' 
+                    value="#{homeBean.destroyTheWorld}" />      
+                                        
+                </f:metadata>
+                
+                <label for='item1'>
+                    <input type='radio' jsf:id='item1' pt:name='a-radio'
+                           value="sim"/>
+                    <span>Sim</span>
+                </label>
+                <label for='item2'>
+                    <input type='radio' jsf:id='item2' pt:name='a-radio'
+                           value='não'/>
+                    <span>Não</span>
+                </label>
+            </div>
+            <br/>
+            Checkbox com elementos jsf<br/>
+            <ui:repeat var="lang" value="#{homeBean.langs}">
+                <label>
+                    <input type="checkbox" 
+                    jsf:value="#{homeBean.languages[lang]}" jsf:id="chk"/>
+                    <span>#{lang}</span>
+                </label>
+            </ui:repeat>
+            <br/>
+            <input type="submit" value="salvar" 
+                   jsf:action="#{homeBean.showSelectedfields}"/>
+            
+            <input type="reset" value="limpar"/>
+        </form>
+    </body>
+</html>
+

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:jsf="http://xmlns.jcp.org/jsf"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <head>
+        <title>index3</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </head>
+    <body>
+        <form jsf:prependId="false" id="frm" method="post">
+            <ui:repeat var="item" value="#{demoBean.items}">
+                
+                <label>
+                    <input type="checkbox" jsf:id="chk_box" 
+                    jsf:value="#{demoBean.checkMap[item]}"/>
+                    <span>#{item}</span>
+                </label>
+                
+            </ui:repeat>
+            <br/>
+            <button jsf:id="btn" jsf:action="#{demoBean.showSelectedItems()}">
+                teste
+            </button>
+        </form>
+    </body>
+</html>
